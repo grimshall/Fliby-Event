@@ -1,7 +1,10 @@
 'use client';
 
-import { useEffect, useState }
-from 'react';
+import {
+  Suspense,
+  useEffect,
+  useState,
+} from 'react';
 
 import { useSearchParams }
 from 'next/navigation';
@@ -14,13 +17,13 @@ from '../../components/Navbar';
 import { supabase }
 from '../../lib/supabase';
 
-export default function SearchPage() {
+function SearchContent() {
 
   const searchParams =
     useSearchParams();
 
   const query =
-    searchParams.get('q');
+  searchParams.get('q') || '';
 
   const [events, setEvents] =
     useState([]);
@@ -150,5 +153,13 @@ export default function SearchPage() {
       </div>
 
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <SearchContent />
+    </Suspense>
   );
 }

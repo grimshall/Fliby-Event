@@ -1,7 +1,10 @@
 'use client';
 
-import { useEffect, useState }
-from 'react';
+import {
+  Suspense,
+  useEffect,
+  useState,
+} from 'react';
 
 import { useSearchParams }
 from 'next/navigation';
@@ -17,7 +20,7 @@ from '../../components/EventCard';
 import { supabase }
 from '../../lib/supabase';
 
-export default function SearchPage() {
+function SearchLocationContent() {
 
   const searchParams =
     useSearchParams();
@@ -104,5 +107,13 @@ const fetchEvents = async () => {
       </div>
 
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <SearchLocationContent />
+    </Suspense>
   );
 }

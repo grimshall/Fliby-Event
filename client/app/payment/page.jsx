@@ -1,21 +1,15 @@
 'use client';
 
-
+import { Suspense, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import QRCode from 'qrcode';
 
-import { supabase }
-from '../../lib/supabase';
-
-import { useState } from 'react';
-
-import { useSearchParams } from 'next/navigation';
-
+import { supabase } from '../../lib/supabase';
 import Navbar from '../../components/Navbar';
 
-export default function PaymentPage() {
+function PaymentContent() {
 
-  const searchParams =
-    useSearchParams();
+  const searchParams = useSearchParams();
 
   const eventId =
     searchParams.get('eventId');
@@ -31,6 +25,8 @@ export default function PaymentPage() {
 
   const quantity =
     searchParams.get('quantity') || 1;
+
+  // KEEP ALL YOUR EXISTING CODE HERE
 
 
   const total =
@@ -394,3 +390,12 @@ const handlePayment = async () => {
     </div>
   );
 }
+
+export default function PaymentPage() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <PaymentContent />
+    </Suspense>
+  );
+}
+
