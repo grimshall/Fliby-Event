@@ -18,14 +18,15 @@ export default function EventList() {
       });
   }, []);
 
-  return (
-    <div className="eventGrid">
-      {events.map((event) => (
-        <EventCard
-          key={event.id}
-          event={event}
-        />
-      ))}
-    </div>
-  );
+return (
+  <div>
+    <h1>Total Events: {events.length}</h1>
+
+    {events.map((event) => (
+      <p key={event.id}>
+        {event.title}
+      </p>
+    ))}
+  </div>
+);
 }
