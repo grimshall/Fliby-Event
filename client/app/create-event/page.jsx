@@ -153,16 +153,15 @@ const removeBenefit = (index) => {
 
     try {
 
-      await axios.post(
-        'http://localhost:5000/events',
-        data,
-        {
-          headers: {
-            'Content-Type':
-              'multipart/form-data',
-          },
-        }
-      );
+await axios.post(
+  'https://fliby-event-production.up.railway.app/events',
+  data,
+  {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  }
+);
 
       alert(
         'Event created successfully!'
