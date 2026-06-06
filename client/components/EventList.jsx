@@ -9,8 +9,7 @@ export default function EventList() {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    axios
-      .get('http://localhost:5000/events')
+      axios.get('https://fliby-event-production.up.railway.app/events')
       .then((res) => {
         setEvents(res.data);
       })
