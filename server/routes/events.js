@@ -74,9 +74,9 @@ router.post(
         host_id,
       } = req.body;
 
-      const image = req.files.image
-        ? `http://localhost:5000/uploads/${req.files.image[0].filename}`
-        : '';
+const image = req.files.image
+  ? `https://fliby-event-production.up.railway.app/uploads/${req.files.image[0].filename}`
+  : '';
 
       const { data, error } = await supabase
         .from('events')
