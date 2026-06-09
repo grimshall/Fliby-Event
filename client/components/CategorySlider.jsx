@@ -57,7 +57,7 @@ const categories = [
 
   {
     name: 'Sport',
-    image: '/sport.png',
+    image: '/sports.png',
   },
 ];
 
