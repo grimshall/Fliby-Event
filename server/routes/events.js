@@ -9,7 +9,6 @@ const upload = multer({
   storage: multer.memoryStorage(),
 });
 
-const upload = multer({ storage });
 
 router.get('/', async (req, res) => {
   const { data, error } = await supabase
