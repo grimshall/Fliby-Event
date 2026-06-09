@@ -1,22 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const multer = require('multer');
-const path = require('path');
-
 const supabase = require('../supabaseClient');
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/');
-  },
+const multer = require('multer');
 
-  filename: (req, file, cb) => {
-    cb(
-      null,
-      Date.now() + path.extname(file.originalname)
-    );
-  },
+const upload = multer({
+  storage: multer.memoryStorage(),
 });
 
 const upload = multer({ storage });
@@ -74,9 +64,42 @@ router.post(
         host_id,
       } = req.body;
 
-const image = req.files.image
-  ? `https://fliby-event-production.up.railway.app/uploads/${req.files.image[0].filename}`
-  : '';
+let image = '';
+
+if (req.files.image) {
+
+  const file = req.files.image[0];
+
+  const fileName =
+    `${Date.now()}-${file.originalname}`;
+
+  const { error: uploadError } =
+    await supabase.storage
+      .from('event-images')
+      .upload(
+        fileName,
+        file.buffer,
+        {
+          contentType: file.mimetype,
+        }
+      );
+
+  if (uploadError) {
+    console.log(uploadError);
+
+    return res.status(500).json({
+      error: uploadError.message,
+    });
+  }
+
+  const {
+    data: { publicUrl },
+  } = supabase.storage
+    .from('event-images')
+    .getPublicUrl(fileName);
+
+  image = publicUrl;
+}
 
       const { data, error } = await supabase
         .from('events')
