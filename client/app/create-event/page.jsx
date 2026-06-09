@@ -241,12 +241,24 @@ setPriceType('paid');
                 Technology
               </option>
 
+              <option value="Network">
+                Network
+              </option>
+
               <option value="Business">
                 Business
               </option>
 
               <option value="Education">
                 Education
+              </option>
+
+              <option value="Marketing">
+                Marketing
+              </option>
+
+              <option value="Workshop">
+                Workshop
               </option>
 
               <option value="Science">
