@@ -45,6 +45,11 @@ const categories = [
     image: '/network.png',
   },
 
+    {
+    name: 'Science',
+    image: '/science.png',
+  },
+
 ];
 
 const CategorySlider = () => {

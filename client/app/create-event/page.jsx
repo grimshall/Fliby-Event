@@ -261,9 +261,7 @@ setPriceType('paid');
                 Health
               </option>
 
-              <option value="Startup">
-                Startup
-              </option>
+
 
             </select>
 
